@@ -1,0 +1,57 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	padding-top: 70px;
+	margin-bottom: 60px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	padding-top: 20px;
+	background-color: #ccc;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-align: center;
+}
+
+.push-top-50 {
+	margin-top: 50px;
+}
+
+.push-bottom-50 {
+	margin-bottom: 50px;
+}
+
+.push-bottom-25 {
+	margin-bottom: 25px;
+}
+
+form {
+	display: inline
+}
+
+.pad-sides {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.push-sides {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.push-bottom {
+	margin-bottom: 10px;
+}
+
+.full-width {
+	width: 100%;
+}
