@@ -4,18 +4,18 @@ import re
 import json
 app = Flask(__name__, template_folder='templates')
 
-headers = {'Content-type': 'application/json'}
+headers = {'Content-Type': 'application/json'}
 bot_id = '43809307b901e29b876e7ad711'
 
 def send_message(content):
-	requests.post('https://api.groupme.com/v3/bots/post', data={'text': content, 'bot_id': bot_id}, headers=headers)
+	request.post('https://api.groupme.com/v3/bots/post', data=json.dumps({'text': content, 'bot_id': bot_id}), headers=headers)
 
 @app.route('/', methods=['GET', 'POST'])
 def chat():
 	if request.method == 'GET':
 		return render_template('home.jinja')
 
-	message = request.json
+	message = request.get_json(silent=True)
 
 	if message['name'].lower() != 'joke bot':
 		if 'hello joke bot' in message['text'].lower():
