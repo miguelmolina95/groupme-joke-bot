@@ -5,7 +5,7 @@ import json
 app = Flask(__name__, template_folder='templates')
 
 headers = {'Content-type': 'application/json'}
-bot_id = '12345'
+bot_id = '43809307b901e29b876e7ad711'
 
 def send_message(content):
 	requests.post('https://api.groupme.com/v3/bots/post', data={'text': content, 'bot_id': bot_id}, headers=headers)
@@ -17,7 +17,7 @@ def chat():
 
 	message = request.json
 
-	if message['name'] != 'joke bot':
+	if message['name'].lower() != 'joke bot':
 		if 'hello joke bot' in message['text'].lower():
 			send_message('Greetings human if you would like to find out more about me visit at my home page:  https://joke-bot-486.herokuapp.com/')
 
