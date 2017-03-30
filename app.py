@@ -5,7 +5,7 @@ import json
 app = Flask(__name__, template_folder='templates')
 
 headers = {'Content-Type': 'application/json'}
-bot_id = '43809307b901e29b876e7ad711'
+bot_id = '192f91528191d46b1eddc30802'
 
 def send_message(content):
 	print 'About send message'
