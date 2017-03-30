@@ -9,7 +9,7 @@ bot_id = '43809307b901e29b876e7ad711'
 
 def send_message(content):
 	print 'About send message'
-	request.post('https://api.groupme.com/v3/bots/post', data={'bot_id': bot_id, 'text': content}, headers=headers)
+	request.post('https://api.groupme.com/v3/bots/post', json={'bot_id': bot_id, 'text': content}, headers=headers)
 
 @app.route('/', methods=['GET', 'POST'])
 def chat():
