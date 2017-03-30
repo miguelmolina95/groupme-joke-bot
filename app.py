@@ -2,10 +2,22 @@ from flask import *
 import requests
 import re
 import json
+import random
 app = Flask(__name__, template_folder='templates')
 
 headers = {'Content-Type': 'application/json'}
 bot_id = '192f91528191d46b1eddc30802'
+
+GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola"]
+
+GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola", "greetings human"]
+
+def check_for_greeting(sentence):
+	"""If any of the words in the user's input was a greeting, return a greeting response"""
+	for word in sentence:
+		if word.lower() in GREETING_KEYWORDS:
+			return random.choice(GREETING_RESPONSES)
+	return False
 
 def send_message(content):
 	print 'About send message'
@@ -19,8 +31,9 @@ def chat():
 	message = request.get_json(silent=True)
 
 	if message['name'].lower() != 'joke bot':
-		if 'hello joke bot' in message['text'].lower():
-			send_message('Greetings human if you would like to find out more about me visit at my home page:  https://joke-bot-486.herokuapp.com/')
+		resp = check_for_greeting(message['text'].split())
+		if resp and 'joke bot' in message['text'].lower():
+			send_message(resp)
 
 	return "ok", 200
 
