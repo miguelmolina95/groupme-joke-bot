@@ -16,7 +16,7 @@ def chat():
 	if request.method == 'GET':
 		return render_template('home.jinja')
 
-	print 'Received POST request'
+	send_message('Hello')
 
 	message = request.get_json(silent=True)
 
