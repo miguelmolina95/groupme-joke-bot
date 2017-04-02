@@ -6,7 +6,7 @@ import random
 app = Flask(__name__, template_folder='templates')
 
 headers = {'Content-Type': 'application/json'}
-bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72'}
+bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
 bot_id = ''
 
 GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola"]
