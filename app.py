@@ -7,7 +7,6 @@ app = Flask(__name__, template_folder='templates')
 
 headers = {'Content-Type': 'application/json'}
 bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
-bot_id = ''
 
 GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola"]
 
@@ -20,7 +19,7 @@ def check_for_greeting(sentence):
 			return random.choice(GREETING_RESPONSES)
 	return False
 
-def send_message(content):
+def send_message(content, bot_id):
 	print 'About send message'
 	requests.post('https://api.groupme.com/v3/bots/post', json={'bot_id': bot_id, 'text': content}, headers=headers)
 
@@ -35,7 +34,7 @@ def chat():
 	if message['name'].lower() != 'joke bot':
 		resp = check_for_greeting(message['text'].split())
 		if resp and 'joke bot' in message['text'].lower():
-			send_message(resp)
+			send_message(resp, bot_id)
 
 	return "ok", 200
 
