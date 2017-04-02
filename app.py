@@ -6,7 +6,8 @@ import random
 app = Flask(__name__, template_folder='templates')
 
 headers = {'Content-Type': 'application/json'}
-bot_id = '9a3cc4a1c84fb5fd6e1b499b72'
+bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72'}
+bot_id = ''
 
 GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola"]
 
@@ -29,6 +30,7 @@ def chat():
 		return render_template('home.jinja')
 
 	message = request.get_json(silent=True)
+	bot_id = bot_ids[message['group_id']]
 
 	if message['name'].lower() != 'joke bot':
 		resp = check_for_greeting(message['text'].split())
