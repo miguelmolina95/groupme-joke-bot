@@ -7,7 +7,10 @@ import random
 import os
 app = Flask(__name__, template_folder='templates')
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+print(os.environ(['DATABASE_URL']))
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/willshellabarger'
 db = SQLAlchemy(app)
 
 # basic database model for storing jokes
@@ -19,7 +22,7 @@ class Joke(db.Model):
     def __init__(self, joke, labels):
         self.joke = joke
         self.labels = labels
-     
+
 
 headers = {'Content-Type': 'application/json'}
 bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
