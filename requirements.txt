@@ -11,7 +11,6 @@ Jinja2==2.9.5
 macholib==1.5.1
 MarkupSafe==1.0
 modulegraph==0.10.4
-nltk==3.0.0
 psycopg2==2.7.1
 py2app==0.7.3
 pyOpenSSL==0.13.1
