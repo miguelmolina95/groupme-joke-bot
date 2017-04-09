@@ -5,6 +5,7 @@ import re
 import json
 import random
 import os
+import nltk
 app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -14,9 +15,9 @@ db = SQLAlchemy(app)
 
 # basic database model for storing jokes
 class Joke(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    joke = db.Column(db.String(300))
-    labels = db.Column(db.String(300))
+	id = db.Column(db.Integer, primary_key=True)
+	joke = db.Column(db.String(300))
+	labels = db.Column(db.String(300))
 
 	def __init__(self, joke, labels):
 		self.joke = joke
@@ -39,7 +40,8 @@ GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola"
 
 def check_for_greeting(sentence):
 	"""If any of the words in the user's input was a greeting, return a greeting response"""
-	for word in sentence:
+	tokens = nltk.word_tokenize(sentence)
+	for word in tokens:
 		if word.lower() in GREETING_KEYWORDS:
 			return random.choice(GREETING_RESPONSES)
 	return False
@@ -57,13 +59,14 @@ def chat():
 	bot_id = bot_ids[message['group_id']]
 
 	if message['name'].lower() != 'joke bot':
-		resp = check_for_greeting(message['text'].split())
+		resp = check_for_greeting(message['text'])
+
 		if resp and 'joke bot' in message['text'].lower():
 			send_message(resp, bot_id)
-
-	if 'chicken' in message['text'].lower():
-		result = Joke.query.all()[0]
-		send_message(result.joke, bot_id)
+		elif 'chicken' in message['text'].lower():
+			result = Joke.query.all()[0]
+			print result
+			send_message(result.joke, bot_id)
 
 	return "ok", 200
 
