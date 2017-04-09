@@ -14,7 +14,6 @@ modulegraph==0.10.4
 psycopg2==2.7.1
 py2app==0.7.3
 pyOpenSSL==0.13.1
-pyparsing==2.0.1
 python-dateutil==1.5
 pytz==2013.7
 requests==2.13.0
@@ -26,4 +25,3 @@ virtualenv==13.1.2
 Werkzeug==0.12.1
 wget==3.2
 xattr==0.6.4
-zope.interface==4.1.1
