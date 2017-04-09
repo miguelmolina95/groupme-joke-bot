@@ -39,7 +39,7 @@ GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola", "he
 
 GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola", "greetings human"]
 
-def check_for_greeting(content):
+def check_for_greeting(sentence):
 	"""If any of the words in the user's input was a greeting, return a greeting response"""
 	for key_word in GREETING_KEYWORDS:
 		if key_word in sentence:
