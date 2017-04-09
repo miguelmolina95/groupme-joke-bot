@@ -9,7 +9,6 @@ app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-print(os.environ(['DATABASE_URL']))
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/willshellabarger'
 db = SQLAlchemy(app)
 
