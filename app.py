@@ -48,7 +48,7 @@ def check_for_greeting(sentence):
 
 def send_message(content, bot_id, old_message):
 	print 'About send message'
-	requests.post('https://api.groupme.com/v3/bots/post', json={'bot_id': bot_id, 'text': content, 'attachments': ["loci": [0, 8], "type": "mentions", "user_ids": [old_message['user_id']]]}, headers=headers)
+	requests.post('https://api.groupme.com/v3/bots/post', json={'bot_id': bot_id, 'text': content, 'attachments': [{"loci": [0, 8], "type": "mentions", "user_ids": [old_message['user_id']]}]}, headers=headers)
 
 @app.route('/', methods=['GET', 'POST'])
 def chat():
