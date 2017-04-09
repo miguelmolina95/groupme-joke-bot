@@ -1,5 +1,5 @@
 from flask import *
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 import requests
 import re
 import json
@@ -9,6 +9,17 @@ app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
+
+# basic database model for storing jokes
+class Joke(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    joke = db.Column(db.String(300))
+    labels = db.Column(db.String(300), unique=True)
+
+    def __init__(self, joke, labels):
+        self.joke = joke
+        self.labels = labels
+     
 
 headers = {'Content-Type': 'application/json'}
 bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
