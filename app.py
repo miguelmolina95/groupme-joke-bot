@@ -1,8 +1,10 @@
 from flask import *
+from flask.ext.sqlalchemy import SQLAlchemy
 import requests
 import re
 import json
 import random
+import os
 app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
