@@ -9,14 +9,14 @@ app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/willshellabarger'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://acumpyderhsdmr:72e27d46c70162bbb212e4f94817786a3b3fd90095f49ebbd664a23da2d8ec41@ec2-54-221-220-82.compute-1.amazonaws.com:5432/d8lf3gpn63kgl8'
 db = SQLAlchemy(app)
 
 # basic database model for storing jokes
 class Joke(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     joke = db.Column(db.String(300))
-    labels = db.Column(db.String(300), unique=True)
+    labels = db.Column(db.String(300))
 
     def __init__(self, joke, labels):
         self.joke = joke
@@ -53,6 +53,10 @@ def chat():
 		resp = check_for_greeting(message['text'].split())
 		if resp and 'joke bot' in message['text'].lower():
 			send_message(resp, bot_id)
+
+	if 'chicken' in message['text'].lower():
+		result = Joke.query.all()[0]
+		send_message(result.joke, bot_id)
 
 	return "ok", 200
 
