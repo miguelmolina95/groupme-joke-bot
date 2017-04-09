@@ -18,15 +18,22 @@ class Joke(db.Model):
     joke = db.Column(db.String(300))
     labels = db.Column(db.String(300))
 
-    def __init__(self, joke, labels):
-        self.joke = joke
-        self.labels = labels
+	def __init__(self, joke, labels):
+		self.joke = joke
+		self.labels = labels.split('|')
 
+	def check_labels_satisfied(sentence):
+		A = set(sentence.split())
+		B = set(self.labels)
+
+		sim = float(len(A.intersection(B))) / len(A.union(B))
+
+		return sim
 
 headers = {'Content-Type': 'application/json'}
 bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
 
-GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola"]
+GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola", "hey"]
 
 GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola", "greetings human"]
 
