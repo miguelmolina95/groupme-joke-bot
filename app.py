@@ -62,11 +62,12 @@ def chat():
 		resp = check_for_greeting(message['text'].lower())
 
 		if resp and 'joke bot' in message['text'].lower():
-			resp = '@' + message['name'] + ' ' + resp 
+			resp = '@' + message['name'] + ' ' + resp
 			send_message(resp, bot_id)
 		elif 'chicken' in message['text'].lower():
 			result = Joke.query.all()[0]
-			print result
+			print result.joke
+			assert(isinstance(result.joke, str))
 			send_message(result.joke, bot_id)
 
 	return "ok", 200
