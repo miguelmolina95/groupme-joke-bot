@@ -10,8 +10,8 @@ from stemmer import *
 app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://acumpyderhsdmr:72e27d46c70162bbb212e4f94817786a3b3fd90095f49ebbd664a23da2d8ec41@ec2-54-221-220-82.compute-1.amazonaws.com:5432/d8lf3gpn63kgl8'
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://acumpyderhsdmr:72e27d46c70162bbb212e4f94817786a3b3fd90095f49ebbd664a23da2d8ec41@ec2-54-221-220-82.compute-1.amazonaws.com:5432/d8lf3gpn63kgl8?sslmode=require'
 db = SQLAlchemy(app)
 
 # basic database model for storing jokes
