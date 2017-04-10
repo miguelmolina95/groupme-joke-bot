@@ -1,5 +1,6 @@
 from flask import *
 from flask_sqlalchemy import SQLAlchemy
+import psycopg2
 import requests
 import re
 import json
