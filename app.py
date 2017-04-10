@@ -70,7 +70,6 @@ def chat():
 		elif 'chicken' in message['text'].lower():
 			result = Joke.query.all()[0]
 			print result.joke
-			assert(isinstance(result.joke, str))
 			send_message(result.joke, bot_id, message)
 
 	return "ok", 200
