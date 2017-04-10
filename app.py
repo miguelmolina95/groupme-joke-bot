@@ -49,7 +49,11 @@ def check_for_greeting(sentence):
 			return random.choice(GREETING_RESPONSES)
 	return False
 
-def send_message(content, bot_id, old_message):
+def send_message(content, bot_id):
+	print 'About send message'
+	requests.post('https://api.groupme.com/v3/bots/post', json={'bot_id': bot_id, 'text': content}, headers=headers)
+
+def send_greeting_message(content, bot_id, old_message):
 	print 'About send message'
 	requests.post('https://api.groupme.com/v3/bots/post', json={'bot_id': bot_id, 'text': content, 'attachments': [{"loci": [[0, len(old_message['name']) + 1]], "type": "mentions", "user_ids": [old_message['user_id']] } ] }, headers=headers)
 
@@ -66,11 +70,11 @@ def chat():
 
 		if resp and 'joke bot' in message['text'].lower():
 			resp = '@' + message['name'] + ' ' + resp
-			send_message(resp, bot_id, message)
+			send_greeting_message(resp, bot_id, message)
 		elif 'chicken' in message['text'].lower():
 			result = Joke.query.all()[0]
 			print result.joke
-			send_message(result.joke, bot_id, message)
+			send_message(result.joke, bot_id)
 
 	return "ok", 200
 
