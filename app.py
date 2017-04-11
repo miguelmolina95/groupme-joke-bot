@@ -24,19 +24,13 @@ class Joke(db.Model):
 
 	def __init__(self, joke, labels, users):
 		self.joke = joke
+		print labels
 		self.labels = (labels.strip()).split(', ')
 		self.users = users.split()
 
 	def check_labels_satisfied(self, sentence):
 		A = set(sentence)
 		B = set(self.labels)
-
-		print 'Labels:'
-		print self.labels
-
-		print "Sets:"
-		print A
-		print B
 
 		sim = float(len(A.intersection(B))) / len(B)
 
