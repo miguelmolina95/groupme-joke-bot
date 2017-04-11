@@ -8,6 +8,11 @@ import sys, os, urllib2
 import time
 
 
+def appropriateJoke(tags): 
+	if "racist" in tags or "dirty" in tags or "sex" in tags: 
+		return False 
+	return True 
+
 
 if __name__ == "__main__":
 	#timekeeping
@@ -66,12 +71,17 @@ if __name__ == "__main__":
 
 			for joke in soup.find_all("div", { "class" : "oneliner" }):
 				jokeID = joke.find('b').get('id')
-				if jokeID not in jokeIDs:
-					jokeIDs.append(jokeID)
-					jokes.write(joke.find('p').text.encode('utf-8').strip() + "|")
-					tags = joke.find('span', {'class' : 'links'})
-					jokes.write(tags.text.replace("Tags: ", "").encode('utf-8').strip() + '\n')
-				
+
+				# Taking out inappropriate jokes 
+				tags = joke.find('span', {'class' : 'links'})
+				jokeTags = tags.text.replace("Tags: ", "").encode('utf-8').strip() + '\n'	
+
+				if appropriateJoke(jokeTags): 
+					if jokeID not in jokeIDs:
+						jokeIDs.append(jokeID)
+						jokes.write(joke.find('p').text.encode('utf-8').strip() + "|")
+						tags = joke.find('span', {'class' : 'links'})
+						jokes.write(tags.text.replace("Tags: ", "").encode('utf-8').strip() + '\n')
 
 			#find all href links in that page
 			for link in soup.find_all('a', href=True):
