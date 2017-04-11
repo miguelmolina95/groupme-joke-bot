@@ -45,6 +45,8 @@ GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola"
 def find_best_joke(content, user):
 	jokes = Joke.query.all()
 
+	print 'Got the query'
+
 	content = content.lower()
 	content = removeSGML(content)
 	content = remove_parenthesis_slash(content)
@@ -53,10 +55,11 @@ def find_best_joke(content, user):
 	stemmed_tokens = stemWords(tokens)
 
 	for joke in jokes:
-		if ( ( joke.check_labels_satisfied(stemmed_tokens) >= 0.5 or ( joke.check_labels_satisfied(stemmed_tokens) > 0 and 'joke' in stemmed_tokens) ) and user not in joke.users):
+		if ( ( joke.check_labels_satisfied(stemmed_tokens) >= 0.5 or ( joke.check_labels_satisfied(stemmed_tokens) > 0 and 'joke' in content) ) and user not in joke.users):
 			j = Joke.query.filter_by(joke=joke.joke)
 			j.users = j.users + ' ' + user
 			db.session.commit()
+			print joke.joke
 			return joke.joke
 
 	return False
