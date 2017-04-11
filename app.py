@@ -31,6 +31,9 @@ class Joke(db.Model):
 		A = set(sentence)
 		B = set(stemWords(self.labels))
 
+		print A
+		print B
+
 		sim = float(len(A.intersection(B))) / len(B)
 
 		return sim
@@ -55,8 +58,6 @@ def find_best_joke(content, user):
 	stemmed_tokens = stemWords(tokens)
 
 	for joke in jokes:
-		print stemmed_tokens
-		print joke.check_labels_satisfied(stemmed_tokens)
 		if ( ( joke.check_labels_satisfied(stemmed_tokens) >= 0.5 or ( joke.check_labels_satisfied(stemmed_tokens) > 0 and 'joke' in content) ) and user not in joke.users):
 			j = Joke.query.filter_by(joke=joke.joke)
 			j.users = j.users + ' ' + user
