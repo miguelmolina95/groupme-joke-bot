@@ -27,7 +27,7 @@ class Joke(db.Model):
 		self.labels = labels.split(', ')
 		self.users = users.split()
 
-	def check_labels_satisfied(sentence):
+	def check_labels_satisfied(self, sentence):
 		A = set(sentence)
 		B = set(self.labels)
 
