@@ -28,16 +28,20 @@ class Joke(db.Model):
 		self.users = users.split()
 
 	def check_labels_satisfied(self, sentence):
-		A = set(sentence)
-		B = set(self.labels)
+		#A = set(sentence)
+		#B = set(self.labels)
 
-		print 'Sets:'
-		print A
-		print B
+		print self.labels
 
-		sim = float(len(A.intersection(B))) / len(B)
+		top = 0.0
 
-		return sim
+		for word in self.labels:
+			if word in sentence:
+				top += 1.0
+
+		#sim = float(len(A.intersection(B))) / len(B)
+
+		return top / len(self.labels)
 
 headers = {'Content-Type': 'application/json'}
 bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
