@@ -18,7 +18,7 @@ db = SQLAlchemy(app)
 # basic database model for storing jokes
 class Joke(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	joke = db.Column(db.String(300))
+	joke = db.Column(db.String(300), unique=True)
 	labels = db.Column(db.String(300))
 	users = db.Column(db.String(300))
 
