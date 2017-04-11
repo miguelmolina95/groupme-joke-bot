@@ -24,8 +24,8 @@ class Joke(db.Model):
 
 	def __init__(self, joke, labels, users):
 		self.joke = joke
-		self.labels = labels.split('|')
-		self.users = users.split()
+		self.labels = labels
+		self.users = users
 
 	def check_labels_satisfied(self, sentence):
 		#A = set(sentence)
@@ -35,7 +35,7 @@ class Joke(db.Model):
 
 		top = 0.0
 
-		for word in self.labels:
+		for word in self.labels.split('|'):
 			if word in sentence:
 				top += 1.0
 
@@ -64,7 +64,7 @@ def find_best_joke(content, user):
 
 	for joke in jokes:
 		print joke.check_labels_satisfied(tokens)
-		if ( ( joke.check_labels_satisfied(tokens) >= 0.5 or ( joke.check_labels_satisfied(tokens) > 0 and 'joke' in tokens) ) and user not in joke.users):
+		if ( ( joke.check_labels_satisfied(tokens) >= 0.5 or ( joke.check_labels_satisfied(tokens) > 0 and 'joke' in tokens) ) and user not in joke.users.split()):
 			j = Joke.query.filter_by(joke=joke.joke)
 			j.users = j.users + ' ' + user
 			db.session.commit()
