@@ -18,22 +18,22 @@ db = SQLAlchemy(app)
 # basic database model for storing jokes
 class Joke(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	joke = db.Column(db.String(300))
+	joke = db.Column(db.String(300), unique=True)
 	labels = db.Column(db.String(300))
+	users = db.Column(db.String(300))
 
-	def __init__(self, joke, labels):
+	def __init__(self, joke, labels, users):
 		self.joke = joke
 		self.labels = labels.split('|')
+		self.users = users.split()
 
 	def check_labels_satisfied(sentence):
-		A = set(sentence.split())
+		A = set(sentence)
 		B = set(self.labels)
 
-		sim = float(len(A.intersection(B))) / len(A.union(B))
+		sim = float(len(A.intersection(B))) / len(B)
 
 		return sim
-
-
 
 headers = {'Content-Type': 'application/json'}
 bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164b143f586e05a'}
@@ -41,6 +41,25 @@ bot_ids = {'29075120': '9a3cc4a1c84fb5fd6e1b499b72', '30076812': 'b7fd76a8184164
 GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola", "hey"]
 
 GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola", "greetings human"]
+
+def find_best_joke(sentence, user):
+	jokes = Joke.query.all()
+
+	content = content.lower()
+	content = removeSGML(content)
+	content = remove_parenthesis_slash(content)
+	tokens = tokenizeText(content)
+	tokens = removeStopwords(tokens)
+	stemmed_tokens = stemWords(tokens)
+
+	for joke in jokes:
+		if (joke.check_labels_satisfied(stemmed_tokens) >= 0.5 or (joke.check_labels_satisfied(stemmed_tokens) > 0 and 'joke' in stemmed_tokens)) and user not in joke.users:
+			j = Joke.query.filter_by(joke=joke.joke)
+			j.users = j.users + ' ' + user
+			db.session.commit()
+			return joke.joke
+
+	return False
 
 def check_for_greeting(sentence):
 	"""If any of the words in the user's input was a greeting, return a greeting response"""
@@ -71,10 +90,10 @@ def chat():
 		if resp and 'joke bot' in message['text'].lower():
 			resp = '@' + message['name'] + ' ' + resp
 			send_greeting_message(resp, bot_id, message)
-		elif 'chicken' in message['text'].lower():
-			result = Joke.query.all()[0]
-			print result.joke
-			send_message(result.joke, bot_id)
+		else:
+			best_joke = find_best_joke(message['text'], message['name'])
+			if best_joke:
+				send_message(best_joke, bot_id)
 
 	return "ok", 200
 
