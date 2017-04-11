@@ -4,9 +4,13 @@ from app import db
 db.drop_all()
 db.create_all()
 
-joke = Joke("Why did the chicken cross the road? To get to the other side.", "chicken|road")
-db.session.add(joke)
-db.session.commit()
+with open('jokes.txt') as file:
+	for line in file:
+		entry = line.split('|')
+		if len(entry) == 2:
+			joke = Joke(entry[0], entry[1])
+			db.session.add(joke)
+			db.session.commit()
 
 result = Joke.query.all()[0]
 print (result.joke)

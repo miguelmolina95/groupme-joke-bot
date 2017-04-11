@@ -23,7 +23,7 @@ class Joke(db.Model):
 
 	def __init__(self, joke, labels):
 		self.joke = joke
-		self.labels = labels.split('|')
+		self.labels = labels.split(', ')
 
 	def check_labels_satisfied(sentence):
 		A = set(sentence.split())
