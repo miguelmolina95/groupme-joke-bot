@@ -29,8 +29,9 @@ class Joke(db.Model):
 
 	def check_labels_satisfied(self, sentence):
 		A = set(sentence)
-		B = set(stemWords(self.labels))
+		B = set(self.labels)
 
+		print self.labels
 		print A
 		print B
 
@@ -55,7 +56,7 @@ def find_best_joke(content, user):
 	content = remove_parenthesis_slash(content)
 	tokens = tokenizeText(content)
 	tokens = removeStopwords(tokens)
-	stemmed_tokens = stemWords(tokens)
+	#stemmed_tokens = stemWords(tokens)
 
 	for joke in jokes:
 		if ( ( joke.check_labels_satisfied(stemmed_tokens) >= 0.5 or ( joke.check_labels_satisfied(stemmed_tokens) > 0 and 'joke' in content) ) and user not in joke.users):
