@@ -59,7 +59,7 @@ def find_best_joke(content, user):
 	#stemmed_tokens = stemWords(tokens)
 
 	for joke in jokes:
-		if ( ( joke.check_labels_satisfied(stemmed_tokens) >= 0.5 or ( joke.check_labels_satisfied(stemmed_tokens) > 0 and 'joke' in content) ) and user not in joke.users):
+		if ( ( joke.check_labels_satisfied(tokens) >= 0.5 or ( joke.check_labels_satisfied(tokens) > 0 and 'joke' in tokens) ) and user not in joke.users):
 			j = Joke.query.filter_by(joke=joke.joke)
 			j.users = j.users + ' ' + user
 			db.session.commit()
