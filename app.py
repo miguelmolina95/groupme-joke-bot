@@ -42,7 +42,7 @@ GREETING_KEYWORDS = ["hello", "hi", "greetings", "sup", "what's up", "hola", "he
 
 GREETING_RESPONSES = ["sup bro", "hey", "*nods*", "hey you get my snap?", "hola", "greetings human"]
 
-def find_best_joke(sentence, user):
+def find_best_joke(content, user):
 	jokes = Joke.query.all()
 
 	content = content.lower()
