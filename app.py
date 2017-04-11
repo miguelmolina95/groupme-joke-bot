@@ -24,14 +24,17 @@ class Joke(db.Model):
 
 	def __init__(self, joke, labels, users):
 		self.joke = joke
-		self.labels = labels.split(', ')
+		self.labels = (labels.strip()).split(',')
 		self.users = users.split()
 
 	def check_labels_satisfied(self, sentence):
 		A = set(sentence)
 		B = set(self.labels)
 
+		print 'Labels:'
 		print self.labels
+
+		print "Sets:"
 		print A
 		print B
 
@@ -52,11 +55,11 @@ def find_best_joke(content, user):
 	print 'Got the query'
 
 	content = content.lower()
-	content = removeSGML(content)
-	content = remove_parenthesis_slash(content)
 	tokens = tokenizeText(content)
 	tokens = removeStopwords(tokens)
 	#stemmed_tokens = stemWords(tokens)
+	print 'Tokens:'
+	print tokens
 
 	for joke in jokes:
 		if ( ( joke.check_labels_satisfied(tokens) >= 0.5 or ( joke.check_labels_satisfied(tokens) > 0 and 'joke' in tokens) ) and user not in joke.users):
