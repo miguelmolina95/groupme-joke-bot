@@ -29,7 +29,7 @@ class Joke(db.Model):
 
 	def check_labels_satisfied(self, sentence):
 		A = set(sentence)
-		B = set(self.labels)
+		B = set(stemWords(self.labels))
 
 		sim = float(len(A.intersection(B))) / len(B)
 
