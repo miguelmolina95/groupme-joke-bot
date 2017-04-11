@@ -4,25 +4,82 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/slate/bootstrap.min.css">
+	<!-- This is miguels stylesheet applied -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/slate/bootstrap.min.css"> -->
+
+	<!-- This is manny's stylesheet applied -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="/static/css/style.css" />
 	<title>Welcome to the Joke Bot home page</title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div>
-			<a class="navbar-brand" href="#">Welcome to the Joke Bot home page</a>
+			<a class="navbar-brand" href="#">Welcome to the EECS 486 Joke Bot home page!</a>
 		</div>
+	</nav> -->
+
+	<nav class="navbar navbar-inverse" role="navigation">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand">Welcome to the EECS 486 Joke Bot home page!</a>
+	    </div>
+	  </div>
 	</nav>
 
-	<h2>I am the life of the party</h2>
-	<img src="../static/img/nexusae0_EKV311B_thumb.gif" alt="Jarvis">
+
+	<div class="jumbotron text-center">
+	  <h1>I am the life of the party</h1>
+	  <p>Website under construction.</p>
+	</div>
+
+	<!-- Here can go the gif of the actual working app -->
+	<center>
+		<img src="../static/img/nexusae0_EKV311B_thumb.gif" alt="Jarvis">
+	</center>
+
+	<div class="container">
+  <div class="row">
+	    <div class="col-sm-4">
+	      <h3>About</h3>
+	      <p>
+			  The purpose of our project is to perform "joke crawling" for personalized jokes for specific members inside a GroupMe group chat.
+		  </p>
+	      <p>
+			  GroupMe is a free group messaging app. A free and simple way to stay in touch with friends and family, quickly and easily. GroupMe works on Windows, iOS, Android, and the web, so you can stay in touch on the go.</p>
+	    </div>
+	    <div class="col-sm-4">
+	      <h3>Problem</h3>
+	      <p>
+			  Humor is important to have in friendly chats and we could take advantage of some of the concepts we learned throughout this class thus far to automate the process.
+		  </p>
+	      <p>Having an understanding of GroupMe's public API, the crawler will be able to bring a little humor into the group.</p>
+	    </div>
+	    <div class="col-sm-4">
+	<h3>Solution</h3>
+	<p>
+		The plan is to make a crawler that looks for jokes in specified websites. This would later be inserted into a database and classified based on specific labels that we assign them.</p>
+	<p>
+		A bot will be placed inside the team's groupme that uses the words a specific person in the group uses to try to find the label that is best fitting to pick a certain joke.
+	</p>
+	<p>
+		The joke will also reply to the specific user and can do mentions (@User) to give the user a notification that it has replied to it using GroupMe's API.
+	</p>
+</div>
+	  </div>
+	</div>
+
+</body>
+
 
 	<footer class="footer">
 		<div class="container">
-			<p class="text-muted">Jarvis Co.</p>
+			<br>
+			<br>
+			<br>
+			<p class="text-muted">We lit</p>
 		</div>
 	</footer>
-
-</body>
+</html>
