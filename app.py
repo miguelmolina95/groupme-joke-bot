@@ -24,13 +24,16 @@ class Joke(db.Model):
 
 	def __init__(self, joke, labels, users):
 		self.joke = joke
-		print labels
 		self.labels = labels.split('|')
 		self.users = users.split()
 
 	def check_labels_satisfied(self, sentence):
 		A = set(sentence)
 		B = set(self.labels)
+
+		print 'Sets:'
+		print A
+		print B
 
 		sim = float(len(A.intersection(B))) / len(B)
 
@@ -56,6 +59,7 @@ def find_best_joke(content, user):
 	print tokens
 
 	for joke in jokes:
+		print joke.check_labels_satisfied(tokens)
 		if ( ( joke.check_labels_satisfied(tokens) >= 0.5 or ( joke.check_labels_satisfied(tokens) > 0 and 'joke' in tokens) ) and user not in joke.users):
 			j = Joke.query.filter_by(joke=joke.joke)
 			j.users = j.users + ' ' + user
