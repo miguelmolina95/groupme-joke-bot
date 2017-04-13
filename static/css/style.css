@@ -16,6 +16,7 @@ body {
 	height: 60px;
 	padding-top: 20px;
 	background-color: #ccc;
+	text-align: left;
 }
 
 .push-top-50 {
