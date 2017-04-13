@@ -64,7 +64,7 @@ def tokenizeText(text):
 					tokens.append(item[:len(item) - 1])
 				elif each != "." and each != "":
 					tokens.append(each)
-		elif item[len(item) - 1] == "," or (item[len(item) - 1] == "." and item.count(".") == 1):
+		elif item[len(item) - 1] == "," or (item[len(item) - 1] == "." and item.count(".") == 1) or item[len(item) - 1] == "?" or item[len(item) - 1] == "!":
 			tokens.append(item[:len(item) - 1])
 		elif item in months:
 			is_date = True
